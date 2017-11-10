@@ -3,7 +3,7 @@ use mycsc;
 
 create table User(
     id serial,
-    email varchar(255) not null,
+    email varchar(255) not null unique,
     password varchar(255) not null,
     token int not null,
     createdAt datetime not null,
@@ -50,7 +50,7 @@ create table Product(
 
 create table Message(
     id serial,
-    type varchar(255) not null,
+    typeMessage varchar(255) not null,
     annonymous tinyint(1) not null,
     content text not null,
     attachment text,
