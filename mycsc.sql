@@ -50,7 +50,7 @@ create table Product(
 
 create table Message(
     id serial,
-    typeMessage varchar(255) not null,
+    messageType varchar(255) not null,
     anonymous tinyint(1) not null,
     content text not null,
     attachment text,
