@@ -1,78 +1,78 @@
 create database mycsc;
 use mycsc;
 
-create table User(
+create table user(
     id serial,
     email varchar(255) not null unique,
     password varchar(255) not null,
     token int not null,
-    createdAt datetime not null,
-    updatedAt datetime not null,
+    created_at datetime not null,
+    updated_at datetime not null,
     primary key(id)
 );
 
-create table CommonUser(
+create table common_user(
     id serial,
     name varchar(255) not null,
     img text,
-    createdAt datetime not null,
-    updatedAt datetime not null,
-    userId bigint unsigned not null,
-    constraint CommonUserUserId foreign key (userId) references User(id),
+    created_at datetime not null,
+    updated_at datetime not null,
+    user_id bigint unsigned not null,
+    constraint common_user_user_id foreign key (user_id) references user(id),
     primary key(id)
 );
 
-create table EnterpriseUser(
+create table enterprise_user(
     id serial,
-    tradeName varchar(255) not null,
-    regCode varchar(255) not null,
+    trade_name varchar(255) not null,
+    reg_code varchar(255) not null,
     country varchar(255) not null,
     img text,
-    createdAt datetime not null,
-    updatedAt datetime not null,
-    userId bigint unsigned not null,
-    constraint EnterpriseUserUserId foreign key (userId) references User(id),
+    created_at datetime not null,
+    updated_at datetime not null,
+    user_id bigint unsigned not null,
+    constraint enterprise_user_user_id foreign key (user_id) references user(id),
     primary key(id)
 );
 
-create table Product(
+create table product(
     id serial,
     brand varchar(255) not null,
     name varchar(255) not null,
     descripton text,
     img text,
-    createdAt datetime not null,
-    updatedAt datetime not null,
-    enterpriseUserId bigint unsigned not null,
-    constraint ProductEnterpriseUserId foreign key (enterpriseUserId) references EnterpriseUser(id),
+    created_at datetime not null,
+    updated_at datetime not null,
+    enterprise_user_id bigint unsigned not null,
+    constraint product_enterprise_user_id foreign key (enterprise_user_id) references enterprise_user(id),
     primary key(id)
 );
 
-create table Message(
+create table message(
     id serial,
-    messageType varchar(255) not null,
+    message_type varchar(255) not null,
     anonymous tinyint(1) not null,
     content text not null,
     attachment text,
-    createdAt datetime not null,
-    updatedAt datetime not null,
-    commonUserId bigint unsigned not null,
-    constraint MessageCommonUserId foreign key (commonUserId) references CommonUser(id),
-    enterpriseUserId bigint unsigned,
-    constraint MessageEnterpriseUserId foreign key (enterpriseUserId) references EnterpriseUser(id),
-    productId bigint unsigned,
-    constraint MessageProductId foreign key (productId) references Product(id),
+    created_at datetime not null,
+    updated_at datetime not null,
+    common_user_id bigint unsigned not null,
+    constraint message_common_user_id foreign key (common_user_id) references common_user(id),
+    enterprise_user_id bigint unsigned,
+    constraint message_enterprise_user_id foreign key (enterprise_user_id) references enterprise_user(id),
+    product_id bigint unsigned,
+    constraint message_product_id foreign key (product_id) references product(id),
     primary key(id)
 );
 
-create table Chat(
+create table chat(
     id serial,
     content text not null,
     sentOn datetime not null,
-    fromUserId bigint unsigned not null,
-    constraint ChatFromUserId foreign key (fromUserId) references User(id),
-    toUserId bigint unsigned not null,
-    constraint ChatToUserId foreign key (toUserId) references User(id),
+    from_user_id bigint unsigned not null,
+    constraint chat_from_user_id foreign key (from_user_id) references user(id),
+    to_user_id bigint unsigned not null,
+    constraint chat_to_user_id foreign key (to_user_id) references user(id),
     primary key(id)
 );
 
