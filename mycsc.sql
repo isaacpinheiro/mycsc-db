@@ -39,7 +39,7 @@ create table product(
     id serial,
     brand varchar(255) not null,
     name varchar(255) not null,
-    descripton text,
+    description text,
     img text,
     created_at datetime not null,
     updated_at datetime not null,
