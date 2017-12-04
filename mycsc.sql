@@ -68,7 +68,7 @@ create table message(
 create table chat(
     id serial,
     content text not null,
-    sentOn datetime not null,
+    sent_on datetime not null,
     from_user_id bigint unsigned not null,
     constraint chat_from_user_id foreign key (from_user_id) references user(id),
     to_user_id bigint unsigned not null,
